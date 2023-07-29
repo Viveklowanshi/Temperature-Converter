@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temperature Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    input[type="number"] {
+      width: 200px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Temperature Converter</h1>
+  <input type="number" id="temperature" placeholder="Enter temperature">
+  <label>
+    <input type="radio" name="unit" value="celsius" checked> Celsius
+  </label>
+  <label>
+    <input type="radio" name="unit" value="fahrenheit"> Fahrenheit
+  </label>
+  <button onclick="convertTemperature()">Convert</button>
+  <div id="result"></div>
+
+  <script>
+    function convertTemperature() {
+      const temperatureInput = document.getElementById("temperature").value;
+      const unitInputs = document.getElementsByName("unit");
+
+      let fromUnit, toUnit;
+      let result;
+
+      for (const unitInput of unitInputs) {
+        if (unitInput.checked) {
+          fromUnit = unitInput.value;
+          toUnit = unitInput.value === "celsius" ? "fahrenheit" : "celsius";
+          break;
+        }
+      }
+
+      if (fromUnit === "celsius") {
+        result = (temperatureInput * 9/5) + 32;
+      } else {
+        result = (temperatureInput - 32) * 5/9;
+      }
+
+      document.getElementById("result").textContent = `Converted Temperature: ${result.toFixed(2)}° ${toUnit}`;
+    }
+  </script>
+</body>
+</html>
